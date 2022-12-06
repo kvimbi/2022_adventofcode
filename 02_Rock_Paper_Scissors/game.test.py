@@ -33,6 +33,32 @@ class MyTestCase(unittest.TestCase):
         self.assertEqual(result, expected_result)
         self.assertEqual(score, expected_score)
 
+    @parameterized.expand([
+        ["A", "X", "DEFEAT", 3],
+        ["A", "Y", "DRAW", 4],
+        ["A", "Z", "VICTORY", 8],
+        ["B", "X", "DEFEAT", 1],
+        ["B", "Y", "DRAW", 5],
+        ["B", "Z", "VICTORY", 9],
+        ["C", "X", "DEFEAT", 2],
+        ["C", "Y", "DRAW", 6],
+        ["C", "Z", "VICTORY", 7],
+    ])
+    def test_correct_game_scoring(self, opponent_play, my_play, expected_result, expected_score):
+        """
+        Instructions got updated for correct scoring see https://adventofcode.com/2022/day/2#part2
+        :param opponent_play:
+        :param my_play:
+        :param expected_result:
+        :param expected_score:
+        :return:
+        """
+        game_round = GameRound(opponent_play, my_play)
+        result = game_round.get_my_correct_result()
+        score = game_round.get_my_correct_score()
+        self.assertEqual(result, expected_result)
+        self.assertEqual(score, expected_score)
+
 
 if __name__ == '__main__':
     unittest.main()

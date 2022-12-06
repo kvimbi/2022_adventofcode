@@ -27,6 +27,25 @@ MY_GAME_RESULT = {
     "CZ": "DRAW",
 }
 
+""" r p s
+X - loose
+Y - draw
+Z - win
+"""
+MY_GAME_INTENT = {
+    "AX": "Z",
+    "AY": "X",
+    "AZ": "Y",
+
+    "BX": "X",
+    "BY": "Y",
+    "BZ": "Z",
+
+    "CX": "Y",
+    "CY": "Z",
+    "CZ": "X",
+}
+
 MY_GAME_POINTS_MAP = {
     "VICTORY": 6,
     "DRAW": 3,
@@ -49,6 +68,16 @@ class GameRound:
 
     def get_my_score(self) -> int:
         return PLAY_POINTS_MAP[self.my_play] + MY_GAME_POINTS_MAP[self.get_my_result()]
+
+    def get_my_correct_result(self) -> str:
+        return MY_GAME_RESULT[self.opponent_play + MY_GAME_INTENT[self.opponent_play + self.my_play]]
+
+    def get_my_correct_score(self) -> int:
+        """
+        see https://adventofcode.com/2022/day/2#part2
+        :return:
+        """
+        return PLAY_POINTS_MAP[MY_GAME_INTENT[self.opponent_play + self.my_play]] + MY_GAME_POINTS_MAP[self.get_my_correct_result()]
 
 
 class InputParser:
