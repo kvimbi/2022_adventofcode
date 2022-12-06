@@ -17,14 +17,9 @@ type CalorieStat = {
   calories: number
 }
 
-export function findFirstLargestStock(stockPile: number[][]): CalorieStat {
-  return stockPile.reduce<CalorieStat>((max, item, index) =>
-      ((a: CalorieStat, b: CalorieStat) => a.calories > b.calories ? a : b)(
-        {
-          index,
-          calories: item.reduce((acc, calories) => acc + calories, 0)
-        },
-        max
-      ),
-    {index: -1, calories: -1})
+export function sortStock(stockPile: number[][]): CalorieStat[] {
+  return stockPile.map((item, index) => ({
+      index,
+      calories: item.reduce((acc, calories) => acc + calories, 0)
+    })).sort((a, b) => Math.sign(a.calories - b.calories))
 }

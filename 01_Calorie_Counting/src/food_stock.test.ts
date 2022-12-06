@@ -1,5 +1,5 @@
 import {describe, expect, test} from '@jest/globals';
-import {findFirstLargestStock, loadFoodStack} from "./food_stock";
+import {sortStock, loadFoodStack} from "./food_stock";
 
 
 describe('01 Advent', () => {
@@ -23,7 +23,7 @@ describe('01 Advent', () => {
     // test number of elves to be 5
     expect(foodStack).not.toBeNull();
     expect(foodStack.length).toBe(5);
-    expect(foodStack).toEqual([
+    expect(foodStack).toStrictEqual([
       [1000, 2000, 3000],
       [4000],
       [5000, 6000],
@@ -34,9 +34,8 @@ describe('01 Advent', () => {
 
   test('Test empty input', () => {
     const inputStock: number[][] = [];
-    const largest = findFirstLargestStock(inputStock);
-    expect(largest.index).toBe(-1)
-    expect(largest.calories).toBe(-1)
+    const largest = sortStock(inputStock);
+    expect(largest).toStrictEqual([])
   })
 
   test('Find single largest', () => {
@@ -47,9 +46,14 @@ describe('01 Advent', () => {
       [7000, 8000, 9000],
       [10000],
     ];
-    const largest = findFirstLargestStock(inputStock);
-    expect(largest.index).toBe(3)
-    expect(largest.calories).toBe(24000)
+    const largest = sortStock(inputStock);
+    expect(largest).toStrictEqual([
+      {"calories": 4000, "index": 1},
+      {"calories": 6000, "index": 0},
+      {"calories": 10000, "index": 4},
+      {"calories": 11000, "index": 2},
+      {"calories": 24000, "index": 3}])
+
   })
   test('Find multiple largest', () => {
     const inputStock = [
@@ -60,9 +64,14 @@ describe('01 Advent', () => {
       [7000, 8000, 9000],
       [10000],
     ];
-    const largest = findFirstLargestStock(inputStock);
-    expect(largest.index).toBe(2)
-    expect(largest.calories).toBe(24000)
+    const largest = sortStock(inputStock);
+    expect(largest).toStrictEqual([
+      {"calories": 4000, "index": 1},
+      {"calories": 6000, "index": 0},
+      {"calories": 10000, "index": 5},
+      {"calories": 11000, "index": 3},
+      {"calories": 24000, "index": 2},
+      {"calories": 24000, "index": 4}]);
   })
 
 });
