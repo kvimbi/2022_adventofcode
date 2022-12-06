@@ -10,3 +10,4 @@ Languages used:
 | - | - |
 | 01 Calorie Counting | TypeScript |
 | 02 Rock Paper Scissors | Python |
+| 03 Rucksack Reorganization | Clojure |
