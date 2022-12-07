@@ -1,0 +1,12 @@
+.idea
+05_Supply_Stacks.iml
+
+
+
+
+# Files and directories created by pub.
+.dart_tool/
+.packages
+
+# Conventional directory for build output.
+build/
