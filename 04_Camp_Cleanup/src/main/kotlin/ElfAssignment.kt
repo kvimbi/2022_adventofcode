@@ -6,6 +6,12 @@ data class ElfAssignment(
         return other.start >= start && other.end <= end
     }
 
+    fun hasOverlapWith(other: ElfAssignment): Boolean {
+        return (start <= other.start && end >= other.end) ||
+                (start >= other.start && start <= other.end) ||
+                (end >= other.start && end <= other.end)
+    }
+
     companion object {
         fun parseRange(rangeString: String): ElfAssignment {
             if (!rangeString.contains("-")) {

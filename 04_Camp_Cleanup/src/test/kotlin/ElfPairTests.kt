@@ -29,29 +29,30 @@ class ElfPairTests {
         @JvmStatic
         fun getData(): List<Arguments> {
             return listOf(
-                Arguments.of(ElfPair(ElfAssignment(2, 4), ElfAssignment(5, 8)), false),
-                Arguments.of(ElfPair(ElfAssignment(4, 6), ElfAssignment(5, 8)), false),
-                Arguments.of(ElfPair(ElfAssignment(5, 6), ElfAssignment(5, 8)), true),
-                Arguments.of(ElfPair(ElfAssignment(6, 7), ElfAssignment(5, 8)), true),
-                Arguments.of(ElfPair(ElfAssignment(7, 8), ElfAssignment(5, 8)), true),
-                Arguments.of(ElfPair(ElfAssignment(7, 9), ElfAssignment(5, 8)), false),
-                Arguments.of(ElfPair(ElfAssignment(8, 9), ElfAssignment(5, 8)), false),
-                Arguments.of(ElfPair(ElfAssignment(9, 10), ElfAssignment(5, 8)), false),
-                Arguments.of(ElfPair(ElfAssignment(5, 8), ElfAssignment(2, 4)), false),
-                Arguments.of(ElfPair(ElfAssignment(5, 8), ElfAssignment(4, 6)), false),
-                Arguments.of(ElfPair(ElfAssignment(5, 8), ElfAssignment(5, 6)), true),
-                Arguments.of(ElfPair(ElfAssignment(5, 8), ElfAssignment(6, 7)), true),
-                Arguments.of(ElfPair(ElfAssignment(5, 8), ElfAssignment(7, 8)), true),
-                Arguments.of(ElfPair(ElfAssignment(5, 8), ElfAssignment(7, 9)), false),
-                Arguments.of(ElfPair(ElfAssignment(5, 8), ElfAssignment(8, 9)), false),
-                Arguments.of(ElfPair(ElfAssignment(5, 8), ElfAssignment(9, 10)), false),
+                Arguments.of(ElfPair(ElfAssignment(2, 4), ElfAssignment(5, 8)), false, false),
+                Arguments.of(ElfPair(ElfAssignment(4, 6), ElfAssignment(5, 8)), false, true),
+                Arguments.of(ElfPair(ElfAssignment(5, 6), ElfAssignment(5, 8)), true, true),
+                Arguments.of(ElfPair(ElfAssignment(6, 7), ElfAssignment(5, 8)), true, true),
+                Arguments.of(ElfPair(ElfAssignment(7, 8), ElfAssignment(5, 8)), true, true),
+                Arguments.of(ElfPair(ElfAssignment(7, 9), ElfAssignment(5, 8)), false, true),
+                Arguments.of(ElfPair(ElfAssignment(8, 9), ElfAssignment(5, 8)), false, true),
+                Arguments.of(ElfPair(ElfAssignment(9, 10), ElfAssignment(5, 8)), false, false),
+                Arguments.of(ElfPair(ElfAssignment(5, 8), ElfAssignment(2, 4)), false, false),
+                Arguments.of(ElfPair(ElfAssignment(5, 8), ElfAssignment(4, 6)), false, true),
+                Arguments.of(ElfPair(ElfAssignment(5, 8), ElfAssignment(5, 6)), true, true),
+                Arguments.of(ElfPair(ElfAssignment(5, 8), ElfAssignment(6, 7)), true, true),
+                Arguments.of(ElfPair(ElfAssignment(5, 8), ElfAssignment(7, 8)), true, true),
+                Arguments.of(ElfPair(ElfAssignment(5, 8), ElfAssignment(7, 9)), false, true),
+                Arguments.of(ElfPair(ElfAssignment(5, 8), ElfAssignment(8, 9)), false, true),
+                Arguments.of(ElfPair(ElfAssignment(5, 8), ElfAssignment(9, 10)), false, false),
             )
         }
     }
 
     @ParameterizedTest
     @MethodSource("getData")
-    fun `test assignment combinations`(pair: ElfPair, expectedResult: Boolean) {
-        assertEquals(expectedResult, pair.isReducibleAssignment())
+    fun `test assignment combinations`(pair: ElfPair, expectedContainsResult: Boolean, expectedOverlapResult: Boolean) {
+        assertEquals(expectedContainsResult, pair.isReducibleAssignment())
+        assertEquals(expectedOverlapResult, pair.hasOverlap())
     }
 }

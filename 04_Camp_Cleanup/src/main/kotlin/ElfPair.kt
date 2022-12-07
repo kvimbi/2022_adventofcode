@@ -6,6 +6,10 @@ data class ElfPair(
         return first.fullyContains(second) || second.fullyContains(first)
     }
 
+    fun hasOverlap():Boolean {
+        return first.hasOverlapWith(second)
+    }
+
     companion object {
         fun parseRawInput(line: String): ElfPair {
             if (!line.contains(",")) {
