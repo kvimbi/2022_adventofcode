@@ -12,3 +12,4 @@ Languages used:
 | 02 Rock Paper Scissors | Python |
 | 03 Rucksack Reorganization | Clojure |
 | 04 Camp Cleanup | Kotlin |
+| 05 Supply Stacks | Dart |
