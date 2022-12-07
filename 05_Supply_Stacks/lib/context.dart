@@ -38,22 +38,22 @@ class Context {
     return stacks.length;
   }
 
-  void executeInstructions() {
+  /// Model 9000 can move only one crate at a time.
+  /// Model 9001 can move multiple at the same time.
+  /// @see https://adventofcode.com/2022/day/5#part2
+  void executeInstructions(bool isModel9001) {
     for (var instruction in instructions) {
       if (instruction.count == 0) {
         continue;
       }
 
-      var fromStackIndex = instruction.fromStack - 1;
-      var toStackIndex = instruction.toStack - 1;
+      final fromStackIndex = instruction.fromStack - 1;
+      final toStackIndex = instruction.toStack - 1;
+      final movedStack = stacks[fromStackIndex].sublist(max(0, stacks[fromStackIndex].length - instruction.count));
 
-      stacks[toStackIndex].addAll(
-          stacks[fromStackIndex]
-              .sublist(max(0, stacks[fromStackIndex].length - instruction.count))
-              .reversed
-      );
-      stacks[fromStackIndex].removeRange(
-          max(0, stacks[fromStackIndex].length - instruction.count), stacks[fromStackIndex].length);
+      stacks[toStackIndex].addAll(isModel9001 ? movedStack : movedStack.reversed);
+      stacks[fromStackIndex]
+          .removeRange(max(0, stacks[fromStackIndex].length - instruction.count), stacks[fromStackIndex].length);
     }
   }
 

@@ -30,10 +30,10 @@ void main() {
     return context;
   }
 
-  test('Executing valid instruction', () {
+  test('Executing valid instruction for 9000', () {
     final context = prepareContext();
     context.instructions.add(Instruction(1, 2, 2));
-    context.executeInstructions();
+    context.executeInstructions(false);
 
     expect(context.stacks[0].length, 1);
     expect(context.stacks[0][0], "A");
@@ -41,20 +41,31 @@ void main() {
     expect(context.stacks[1][0], "C");
     expect(context.stacks[1][1], "B");
   });
+  test('Executing valid instruction for 9001', () {
+    final context = prepareContext();
+    context.instructions.add(Instruction(1, 2, 2));
+    context.executeInstructions(true);
 
-  test('Executing zero instruction', () {
+    expect(context.stacks[0].length, 1);
+    expect(context.stacks[0][0], "A");
+    expect(context.stacks[1].length, 2);
+    expect(context.stacks[1][0], "B");
+    expect(context.stacks[1][1], "C");
+  });
+
+  test('Executing zero instruction for 9000', () {
     final context = prepareContext();
     context.instructions.add(Instruction(1, 2, 0));
-    context.executeInstructions();
+    context.executeInstructions(false);
 
     expect(context.stacks[0].length, 3);
     expect(context.stacks[1].length, 0);
   });
 
-  test('Executing over-sized instruction', () {
+  test('Executing over-sized instruction for 9000', () {
     final context = prepareContext();
     context.instructions.add(Instruction(1, 2, 4));
-    context.executeInstructions();
+    context.executeInstructions(false);
 
     expect(context.stacks[0].length, 0);
     expect(context.stacks[1].length, 3);
@@ -64,18 +75,27 @@ void main() {
     final context = prepareContext();
     context.instructions.add(Instruction(1, 2, 2));
     context.instructions.add(Instruction(2, 1, 1));
-    context.executeInstructions();
+    context.executeInstructions(false);
 
     expect(context.stacks[0].length, 2);
     expect(context.stacks[1].length, 1);
   });
 
-  test('Validate sample solution', () {
+  test('Validate sample solution for 9000', () {
     File file = File('test_input.txt');
     final context = parseInputLines(file.readAsLinesSync());
-    context.executeInstructions();
+    context.executeInstructions(false);
     expect(context.stacks[0].last, "[C]");
     expect(context.stacks[1].last, "[M]");
     expect(context.stacks[2].last, "[Z]");
+  });
+
+  test('Validate sample solution for 9001', () {
+    File file = File('test_input.txt');
+    final context = parseInputLines(file.readAsLinesSync());
+    context.executeInstructions(true);
+    expect(context.stacks[0].last, "[M]");
+    expect(context.stacks[1].last, "[C]");
+    expect(context.stacks[2].last, "[D]");
   });
 }
