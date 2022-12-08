@@ -15,3 +15,4 @@ Languages used:
 | 05 Supply Stacks | Dart |
 | 06 Tuning Trouble | GO |
 | 07 No Space Left On Device | Scala |
+| 08 Treetop Tree House | Rust |
