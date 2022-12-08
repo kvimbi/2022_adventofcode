@@ -13,4 +13,5 @@ Languages used:
 | 03 Rucksack Reorganization | Clojure |
 | 04 Camp Cleanup | Kotlin |
 | 05 Supply Stacks | Dart |
-| 06 Supply Stacks | GO |
+| 06 Tuning Trouble | GO |
+| 07 No Space Left On Device | Scala |
