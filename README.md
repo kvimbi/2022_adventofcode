@@ -16,3 +16,4 @@ Languages used:
 | 06 Tuning Trouble | GO |
 | 07 No Space Left On Device | Scala |
 | 08 Treetop Tree House | Rust |
+| 09 Rope Bridge | Ruby |
