@@ -17,3 +17,4 @@ Languages used:
 | 07 No Space Left On Device | Scala |
 | 08 Treetop Tree House | Rust |
 | 09 Rope Bridge | Ruby |
+| 10 Cathode-Ray Tube | C++ |
